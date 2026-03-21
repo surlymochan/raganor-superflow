@@ -1,0 +1,29 @@
+{
+  "name": "@raganor/superflow",
+  "version": "1.0.0",
+  "description": "跨平台超级工作流 - SDD + 一句话需求 + TDD + 对抗性验证的长程模糊任务最佳帮手",
+  "slogan": "跨平台的超级工作流 - SDD + 一句话需求 + TDD + 对抗性验证的长程模糊任务的最佳帮手！",
+  "author": "Raganor",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "opencode",
+    "cursor",
+    "workflow",
+    "sdd",
+    "tdd",
+    "agent"
+  ],
+  "scripts": {
+    "install:claude-code": "node scripts/install-claude-code.js",
+    "install:opencode": "node scripts/install-opencode.js",
+    "install:cursor": "node scripts/install-cursor.js",
+    "install:all": "npm run install:claude-code && npm run install:opencode && npm run install:cursor"
+  },
+  "files": [
+    "config/",
+    "scripts/",
+    "commands/",
+    "skills/"
+  ]
+}
