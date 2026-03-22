@@ -2,22 +2,42 @@
 # 根据修改文件自动打标签
 
 feature:
-  - src/**/*
-  - scripts/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - src/**/*
+          - scripts/**/*
+
 ci:
-  - .github/workflows/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/**/*
+
 documentation:
-  - '**/*.md'
-  - docs/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.md'
+          - docs/**/*
+
 testing:
-  - '**/*.test.ts'
-  - '**/*.test.js'
-  - '**/*.spec.ts'
-  - '**/*.spec.js'
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.test.ts'
+          - '**/*.test.js'
+          - '**/*.spec.ts'
+          - '**/*.spec.js'
+
 dependencies:
-  - package.json
-  - package-lock.json
+  - changed-files:
+      - any-glob-to-any-file:
+          - package.json
+          - package-lock.json
+
 config:
-  - config/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - config/**/*
+
 openspec:
-  - openspec/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - openspec/**/*
