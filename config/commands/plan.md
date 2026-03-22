@@ -1,6 +1,6 @@
 ---
 name: superflow:plan
-description: Superflow 阶段 2: 计划 - Spec 定稿 → 任务分解
+description: Superflow 阶段 2: 计划 - PRD 定稿 → Spec 定稿 → 任务分解
 ---
 
 # Superflow 阶段 2：计划
@@ -9,18 +9,55 @@ description: Superflow 阶段 2: 计划 - Spec 定稿 → 任务分解
 
 ## 前置条件
 
-- 阶段 1 设计已批准
+- 阶段 1 PRD 和设计已批准
 
 ## 流程
 
-1. **Spec 定稿** - `openspec/specs/<domain>/<name>.md`
-2. **任务分解** - 每项 2-5 分钟，包含完整代码示例
-3. **等待批准**
+1. **PRD 定稿** - `openspec/specs/domain/<domain>/prd-<name>.md` (从草稿转为正式版)
+2. **Spec 定稿** - `openspec/specs/<type>/<name>.md` (技术/API/架构规范)
+3. **任务分解** - 每项 2-5 分钟，包含完整代码示例
+4. **等待批准**
 
 ## 产出
 
-- `openspec/specs/<domain>/<name>.md` - 规范真理源
+- `openspec/specs/domain/<domain>/prd-<name>.md` - **产品需求文档 (PRD) 正式版**
+- `openspec/specs/<type>/<name>.md` - 技术规范真理源
 - `docs/plans/YYYY-MM-DD-<name>-plan.md` - 任务清单
+
+## PRD 与 Spec 的关系
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     PRD (产品需求)                          │
+│  openspec/specs/domain/<domain>/prd-<name>.md              │
+│  - 用户故事                                                 │
+│  - 功能需求                                                 │
+│  - 验收标准                                                 │
+└─────────────────────────────────────────────────────────────┘
+                          ↓ 驱动
+┌─────────────────────────────────────────────────────────────┐
+│                     Spec (技术规范)                         │
+│  openspec/specs/<type>/<name>.md                           │
+│  - API 设计                                                   │
+│  - 架构决策                                                 │
+│  - 数据模型                                                 │
+└─────────────────────────────────────────────────────────────┘
+                          ↓ 驱动
+┌─────────────────────────────────────────────────────────────┐
+│                   任务清单 (Tasks)                          │
+│  openspec/changes/<name>/tasks.md                          │
+│  - 实现任务                                                 │
+│  - 测试任务                                                 │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## PRD 版本管理
+
+| 阶段 | PRD 版本 | 位置 |
+|------|----------|------|
+| 阶段 1 (脑暴) | v0.1 (草稿) | `openspec/changes/<name>/prd-draft.md` |
+| 阶段 2 (计划) | v1.0 (正式) | `openspec/specs/domain/<domain>/prd-<name>.md` |
+| 变更后 | v1.1, v1.2... | 同上，版本号递增 |
 
 ## 批准后：执行模式选择
 

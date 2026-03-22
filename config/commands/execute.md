@@ -10,7 +10,15 @@ description: Superflow 阶段 3: 执行 - TDD → E2E → 浏览器验证
 ## 前置条件
 
 - 阶段 2 Spec 和任务已批准
+- PRD 文档存在：`openspec/specs/domain/<domain>/prd-<name>.md`
 - 计划文档存在：`docs/plans/YYYY-MM-DD-<name>-plan.md`
+
+## 验证 PRD 对齐
+
+执行前，AI 应验证：
+1. 每项任务都能追溯到 PRD 中的用户故事或功能需求
+2. 验收标准与 PRD 一致
+3. 无范围蔓延（实现 PRD 未包含的功能）
 
 ## 执行模式
 

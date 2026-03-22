@@ -364,19 +364,42 @@ jobs:
 openspec/
 ├── README.md                     # 使用说明
 ├── specs/
-│   ├── domain/                   # 领域规范
+│   ├── domain/                   # 领域规范 (含 PRD)
+│   │   └── <domain>/
+│   │       ├── prd-<name>.md     # 产品需求文档
+│   │       └── spec.md           # 领域规范
 │   ├── api/                      # API 规范
 │   └── arch/                     # 架构规范
 └── changes/
     ├── <change-name>/            # 进行中的变更
     │   ├── proposal.md           # 变更提案
+    │   ├── prd-draft.md          # PRD 草稿 (阶段 1)
     │   ├── design.md             # 技术设计
     │   └── tasks.md              # 任务清单
     └── archive/                  # 已归档变更
         └── YYYY-MM-DD-<name>/
 ```
 
-### 4.2 变更提案格式
+### 4.2 PRD (产品需求文档)
+
+**PRD 是产品需求的真理源**，包含：
+- 问题陈述和目标用户
+- 用户故事和验收标准
+- 功能需求和非功能需求
+- 依赖与风险
+- 发布计划
+
+**PRD 生命周期**:
+| 阶段 | PRD 状态 | 位置 |
+|------|----------|------|
+| 阶段 1 (脑暴) | v0.1 草稿 | `openspec/changes/<name>/prd-draft.md` |
+| 阶段 2 (计划) | v1.0 正式 | `openspec/specs/domain/<domain>/prd-<name>.md` |
+| 阶段 3 (执行) | 验收验证 | 参考 PRD 验证 |
+| 阶段 4 (归档) | 版本更新 | `openspec/specs/domain/<domain>/prd-<name>.md` (v1.1...) |
+
+**PRD 模板**: 使用 `config/templates/prd-template.md`
+
+### 4.3 变更提案格式
 
 ```markdown
 # 变更提案：<name>
@@ -429,6 +452,7 @@ openspec/
 | `docs/design/README.md` | 设计门户 |
 | `docs/design/DOCUMENT-MAP.md` | 文档地图 |
 | `docs/issues/README.md` | Issues 说明 |
+| `config/templates/prd-template.md` | PRD 模板 |
 
 ---
 
