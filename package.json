@@ -7,12 +7,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/raganor/raganor-superflow.git"
+    "url": "https://github.com/surlymochan/raganor-superflow.git"
   },
   "bugs": {
-    "url": "https://github.com/raganor/raganor-superflow/issues"
+    "url": "https://github.com/surlymochan/raganor-superflow/issues"
   },
-  "homepage": "https://github.com/raganor/raganor-superflow#readme",
+  "homepage": "https://github.com/surlymochan/raganor-superflow#readme",
   "keywords": [
     "claude-code",
     "opencode",
@@ -47,5 +47,10 @@
     "darwin",
     "linux",
     "win32"
-  ]
+  ],
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0"
+  }
 }
