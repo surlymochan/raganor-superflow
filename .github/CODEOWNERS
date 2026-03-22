@@ -1,0 +1,14 @@
+# CODEOWNERS
+
+# 根目录
+* @raganor
+
+# 核心配置
+.github/ @raganor
+package.json @raganor
+
+# OpenSpec 规范
+openspec/ @raganor
+
+# 工作流命令定义
+config/commands/ @raganor

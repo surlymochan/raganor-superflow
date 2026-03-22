@@ -1,0 +1,74 @@
+name: Workflow Sanity Check
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - '.github/workflows/**'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - '.github/workflows/**'
+
+jobs:
+  validate-workflows:
+    name: Validate Workflow Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate workflow YAML syntax
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .github/workflows/*.yml
+          config_data: |
+            extends: default
+            rules:
+              line-length: disable
+              truthy: disable
+
+      - name: Check workflow file naming
+        run: |
+          echo "=== Workflow File Naming Check ==="
+          cd .github/workflows
+          for f in *.yml; do
+            if [[ ! $f =~ ^[a-z0-9-]+\.yml$ ]]; then
+              echo "❌ Invalid workflow name: $f (should be kebab-case)"
+              exit 1
+            fi
+          done
+          echo "✅ All workflow names are valid"
+
+      - name: Verify required workflows exist
+        run: |
+          echo "=== Required Workflows Check ==="
+          required_workflows=(
+            "ci.yml"
+            "publish.yml"
+            "code-review.yml"
+          )
+
+          missing=0
+          for workflow in "${required_workflows[@]}"; do
+            if [ ! -f ".github/workflows/$workflow" ]; then
+              echo "❌ Missing required workflow: $workflow"
+              missing=$((missing + 1))
+            else
+              echo "✅ Found: $workflow"
+            fi
+          done
+
+          if [ $missing -gt 0 ]; then
+            echo "❌ Missing $missing required workflows"
+            exit 1
+          fi
+
+          echo "✅ All required workflows present"
+
+      - name: Summary
+        run: |
+          echo "### 🔍 Workflow Sanity Check 完成" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ YAML 语法验证通过" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 命名规范检查通过" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ 核心工作流存在" >> $GITHUB_STEP_SUMMARY

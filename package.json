@@ -30,7 +30,9 @@
     "install:cursor": "node scripts/install-cursor.js",
     "install:all": "npm run install:claude-code && npm run install:opencode && npm run install:cursor",
     "test": "node -c scripts/install-claude-code.js && node -c scripts/install-opencode.js && node -c scripts/install-cursor.js && echo '✓ All scripts syntax OK'",
-    "lint": "echo 'No linter configured yet'"
+    "lint": "eslint config/ scripts/",
+    "validate": "node scripts/validate-norm.js",
+    "validate:workflows": "action-validator .github/workflows/*.yml"
   },
   "files": [
     "config/",
