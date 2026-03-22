@@ -7,8 +7,8 @@
  * 验证项目是否遵循 Superflow GitHub 项目规范 v1.0
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // ANSI 颜色代码
 const colors = {

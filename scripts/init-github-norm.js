@@ -6,8 +6,8 @@
  * 为新项目快速应用 Superflow GitHub Norm v1.0 配置
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 const colors = {
   reset: '\x1b[0m',
