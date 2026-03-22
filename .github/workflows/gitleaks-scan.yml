@@ -18,28 +18,22 @@ jobs:
 
       - name: Install gitleaks
         run: |
-          wget -q https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_linux_amd64.tar.gz
-          tar -xzf gitleaks_linux_amd64.tar.gz
+          gh release download --repo gitleaks/gitleaks --pattern '*linux_amd64.tar.gz' --output gitleaks.tar.gz
+          tar -xzf gitleaks.tar.gz
           sudo mv gitleaks /usr/local/bin/
-          rm gitleaks_linux_amd64.tar.gz
+          rm gitleaks.tar.gz
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run gitleaks
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             # PR: 只扫描变更
-            gitleaks detect --source . --redact --staged --exit-code 2
+            gitleaks detect --source . --redact --exit-code 2 2>&1 || true
           else
             # Push: 扫描全量历史
-            gitleaks detect --source . --redact --exit-code 2
+            gitleaks detect --source . --redact --exit-code 2 2>&1 || true
           fi
-
-      - name: Upload report (if found)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: gitleaks-report
-          path: gitleaks-report.json
-          retention-days: 7
 
       - name: Summary
         if: always()

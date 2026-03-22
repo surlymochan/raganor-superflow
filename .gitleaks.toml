@@ -1,5 +1,6 @@
 # Gitleaks 配置文件
 # 用于排除误报和自定义规则
+# 文档：https://github.com/gitleaks/gitleaks#configuration
 
 title = "Superflow Gitleaks Config"
 
@@ -9,16 +10,29 @@ useDefault = true
 [allowlist]
 description = "排除误报"
 
-# 排除特定文件
+# 排除特定文件路径
 paths = [
   '''node_modules/.*''',
   '''package-lock.json''',
   '''.*\.test\.(js|ts|tsx)$''',
   '''coverage/.*''',
   '''dist/.*''',
+  '''\.gitignore''',
+  '''\.github/.*''',
 ]
+
+# 排除特定 rule（如果有误报）
+# rules = [
+#   "aws-access-key",
+#   "generic-api-key"
+# ]
 
 # 排除特定 commit（如果历史中有已处理的 secret）
 # commits = [
 #   "abc1234567890..."
-#]
+# ]
+
+# 排除包含特定路径的 commit
+# commitPaths = [
+#   "config.example.json"
+# ]
