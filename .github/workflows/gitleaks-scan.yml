@@ -18,37 +18,21 @@ jobs:
 
       - name: Install gitleaks
         run: |
-          gh release download --repo gitleaks/gitleaks --pattern '*linux_amd64.tar.gz' --output gitleaks.tar.gz
+          curl -sL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_linux_amd64.tar.gz -o gitleaks.tar.gz
           tar -xzf gitleaks.tar.gz
           sudo mv gitleaks /usr/local/bin/
           rm gitleaks.tar.gz
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run gitleaks
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            # PR: 只扫描变更
-            gitleaks detect --source . --redact --exit-code 2 2>&1 || true
-          else
-            # Push: 扫描全量历史
-            gitleaks detect --source . --redact --exit-code 2 2>&1 || true
-          fi
+          gitleaks detect --source . --redact --exit-code 2
 
       - name: Summary
         if: always()
         run: |
           echo "### 🔍 Gitleaks Secret Scan 完成" >> $GITHUB_STEP_SUMMARY
           echo ""
-          echo "**扫描范围**:" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            echo "- PR 变更内容" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- 完整 Git 历史" >> $GITHUB_STEP_SUMMARY
-          fi
-          echo ""
           echo "**如果发现 secret**:" >> $GITHUB_STEP_SUMMARY
           echo "1. 🚨 立即撤销泄露的密钥" >> $GITHUB_STEP_SUMMARY
-          echo "2. 使用 \`git filter-branch\` 或 BFG 从历史中删除" >> $GITHUB_STEP_SUMMARY
+          echo "2. 从 Git 历史中彻底删除" >> $GITHUB_STEP_SUMMARY
           echo "3. 重新生成新密钥" >> $GITHUB_STEP_SUMMARY
-          echo "4. 检查是否有未授权的访问" >> $GITHUB_STEP_SUMMARY
