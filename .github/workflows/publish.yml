@@ -23,10 +23,10 @@ jobs:
 
       - name: Verify config files exist
         run: |
-          test -f config/commands/brainstorm.md
+          test -f config/commands/clarify.md
           test -f config/commands/plan.md
           test -f config/commands/execute.md
-          test -f config/commands/archive.md
+          test -f config/commands/verify.md
 
       - name: Publish to npm
         run: npm publish --access public

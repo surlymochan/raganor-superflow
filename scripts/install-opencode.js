@@ -27,9 +27,11 @@ function install() {
   console.log('📦 安装命令...');
   const commandFiles = fs.readdirSync(SOURCE_COMMANDS_DIR);
   commandFiles.forEach(file => {
-    const src = path.join(SOURCE_COMMANDS_DIR, file);
-    const dest = path.join(COMMANDS_DIR, file);
-    copyFileSync(src, dest);
+    if (file.endsWith('.md')) {
+      const src = path.join(SOURCE_COMMANDS_DIR, file);
+      const dest = path.join(COMMANDS_DIR, file);
+      copyFileSync(src, dest);
+    }
   });
 
   // 安装技能（如果存在）
@@ -37,18 +39,20 @@ function install() {
     console.log('\n📦 安装技能...');
     const skillFiles = fs.readdirSync(SOURCE_SKILLS_DIR);
     skillFiles.forEach(file => {
-      const src = path.join(SOURCE_SKILLS_DIR, file);
-      const dest = path.join(SKILLS_DIR, file);
-      copyFileSync(src, dest);
+      if (file.endsWith('.md') || file.endsWith('.js')) {
+        const src = path.join(SOURCE_SKILLS_DIR, file);
+        const dest = path.join(SKILLS_DIR, file);
+        copyFileSync(src, dest);
+      }
     });
   }
 
   console.log('\n✅ Superflow 已安装到 OpenCode！');
   console.log('\n使用方法:');
-  console.log('  /superflow:brainstorm <需求>');
-  console.log('  /superflow:plan [名称]');
-  console.log('  /superflow:execute [名称]');
-  console.log('  /superflow:archive [名称]');
+  console.log('  /superflow:clarify <一句话需求>  # 阶段1: 澄清');
+  console.log('  /superflow:plan <name>           # 阶段2: 计划');
+  console.log('  /superflow:execute <name>         # 阶段3: 执行');
+  console.log('  /superflow:verify <name>         # 阶段4: 验证');
 }
 
 install();

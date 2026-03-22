@@ -10,19 +10,12 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Auto comment
-        uses: thijsvanloef/pr-comment-action@v3
+      - uses: actions/github-script@v7
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: |
-            👋 你好！感谢你的 PR。
-
-            **CI 检查正在运行**，请等待所有检查完成后再合并。
-
-            🔍 **已触发的自动检查**：
-            - ✅ CI (测试 + 构建验证)
-            - ✅ Code Review (代码质量)
-            - ✅ Adversarial QA Review (对抗性审查)
-            - ✅ CodeQL (安全扫描)
-
-            如有问题会自动显示在这里。
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 你好！感谢你的 PR。\n\n**CI 检查正在运行**，请等待所有检查完成后再合并。\n\n🔍 **已触发的自动检查**：\n- ✅ CI (测试 + 构建验证)\n- ✅ Code Review (代码质量)\n- ✅ Secret Scan (安全扫描)\n- ✅ CodeQL (安全分析)\n\n如有问题会自动显示在这里。'
+            })

@@ -1,6 +1,3 @@
-# PR Labeler 配置
-# 根据修改文件自动打标签
-
 feature:
   - src/**/*
   - scripts/**/*
