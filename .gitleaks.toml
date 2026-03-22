@@ -1,0 +1,24 @@
+# Gitleaks 配置文件
+# 用于排除误报和自定义规则
+
+title = "Superflow Gitleaks Config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "排除误报"
+
+# 排除特定文件
+paths = [
+  '''node_modules/.*''',
+  '''package-lock.json''',
+  '''.*\.test\.(js|ts|tsx)$''',
+  '''coverage/.*''',
+  '''dist/.*''',
+]
+
+# 排除特定 commit（如果历史中有已处理的 secret）
+# commits = [
+#   "abc1234567890..."
+#]

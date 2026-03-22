@@ -1,0 +1,60 @@
+name: Gitleaks Scan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main, master]
+
+jobs:
+  gitleaks:
+    name: Secret Scan (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks
+        run: |
+          wget -q https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_linux_amd64.tar.gz
+          tar -xzf gitleaks_linux_amd64.tar.gz
+          sudo mv gitleaks /usr/local/bin/
+          rm gitleaks_linux_amd64.tar.gz
+
+      - name: Run gitleaks
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            # PR: 只扫描变更
+            gitleaks detect --source . --redact --staged --exit-code 2
+          else
+            # Push: 扫描全量历史
+            gitleaks detect --source . --redact --exit-code 2
+          fi
+
+      - name: Upload report (if found)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: gitleaks-report.json
+          retention-days: 7
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### 🔍 Gitleaks Secret Scan 完成" >> $GITHUB_STEP_SUMMARY
+          echo ""
+          echo "**扫描范围**:" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "- PR 变更内容" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- 完整 Git 历史" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo ""
+          echo "**如果发现 secret**:" >> $GITHUB_STEP_SUMMARY
+          echo "1. 🚨 立即撤销泄露的密钥" >> $GITHUB_STEP_SUMMARY
+          echo "2. 使用 \`git filter-branch\` 或 BFG 从历史中删除" >> $GITHUB_STEP_SUMMARY
+          echo "3. 重新生成新密钥" >> $GITHUB_STEP_SUMMARY
+          echo "4. 检查是否有未授权的访问" >> $GITHUB_STEP_SUMMARY
