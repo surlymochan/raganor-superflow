@@ -17,15 +17,10 @@ jobs:
           fetch-depth: 0
 
       - name: Install gitleaks
-        run: |
-          curl -sL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_linux_amd64.tar.gz -o gitleaks.tar.gz
-          tar -xzf gitleaks.tar.gz
-          sudo mv gitleaks /usr/local/bin/
-          rm gitleaks.tar.gz
-
-      - name: Run gitleaks
-        run: |
-          gitleaks detect --source . --redact --exit-code 2
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
       - name: Summary
         if: always()
