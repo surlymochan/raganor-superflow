@@ -8,7 +8,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 
 const colors = {
   reset: '\x1b[0m',
@@ -277,7 +276,7 @@ function createFile(content, dest, desc) {
   let projectName = path.basename(ROOT);
   let owner = 'owner';
   let repo = path.basename(ROOT);
-  let domain = 'example.com';
+  const domain = 'example.com';
 
   if (fs.existsSync(pkgPath)) {
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
@@ -349,11 +348,15 @@ function main() {
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 
     // 添加验证脚本
-    if (!pkg.scripts) pkg.scripts = {};
+    if (!pkg.scripts) {
+      pkg.scripts = {};
+    }
     pkg.scripts['validate:norm'] = 'node ../scripts/validate-github-norm.js';
 
     // 添加 devDependencies
-    if (!pkg.devDependencies) pkg.devDependencies = {};
+    if (!pkg.devDependencies) {
+      pkg.devDependencies = {};
+    }
     pkg.devDependencies['eslint'] = '^9.0.0';
     pkg.devDependencies['@eslint/js'] = '^9.0.0';
 
