@@ -1,0 +1,20 @@
+feature:
+  - src/**/*
+  - scripts/**/*
+ci:
+  - .github/workflows/**/*
+documentation:
+  - '**/*.md'
+  - docs/**/*
+testing:
+  - '**/*.test.ts'
+  - '**/*.test.js'
+  - '**/*.spec.ts'
+  - '**/*.spec.js'
+dependencies:
+  - package.json
+  - package-lock.json
+config:
+  - config/**/*
+openspec:
+  - openspec/**/*
