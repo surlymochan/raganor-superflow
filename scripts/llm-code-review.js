@@ -103,7 +103,7 @@ ${diff}
     console.log(review);
     console.log('\n--- End Review ---\n');
 
-    const { hasCritical, hasMajorIssues, approved } = classifyReview(review);
+    const { hasCritical, hasMajorIssues } = classifyReview(review);
 
     if (hasCritical) {
       console.log('\n❌ LLM found critical issues, failing CI');
