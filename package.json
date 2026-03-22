@@ -32,7 +32,9 @@
     "test": "node -c scripts/install-claude-code.js && node -c scripts/install-opencode.js && node -c scripts/install-cursor.js && echo '✓ All scripts syntax OK'",
     "lint": "eslint scripts/",
     "validate": "node scripts/validate-norm.js",
-    "validate:workflows": "action-validator .github/workflows/*.yml"
+    "validate:norm": "node scripts/validate-github-norm.js",
+    "validate:workflows": "action-validator .github/workflows/*.yml",
+    "init:norm": "node scripts/init-github-norm.js"
   },
   "files": [
     "config/",
