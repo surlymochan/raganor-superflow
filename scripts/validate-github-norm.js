@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 /**
  * Superflow GitHub Norm v1.0 合规性验证脚本
