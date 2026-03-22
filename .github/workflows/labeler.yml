@@ -1,17 +1,39 @@
-name: Label PRs
+# PR Labeler 配置
+# 根据修改文件自动打标签
 
-on:
-  pull_request_target:
-    types: [opened]
-
-jobs:
-  label:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - uses: actions/labeler@v5
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          configuration-path: .github/labeler.yml
+version: 2
+labels:
+  - label: "feature"
+    matcher:
+      files:
+        - "src/**/*"
+        - "scripts/**/*"
+  - label: "ci"
+    matcher:
+      files:
+        - ".github/workflows/**/*"
+  - label: "documentation"
+    matcher:
+      files:
+        - "**/*.md"
+        - "docs/**/*"
+  - label: "testing"
+    matcher:
+      files:
+        - "**/*.test.ts"
+        - "**/*.test.js"
+        - "**/*.spec.ts"
+        - "**/*.spec.js"
+  - label: "dependencies"
+    matcher:
+      files:
+        - "package.json"
+        - "package-lock.json"
+  - label: "config"
+    matcher:
+      files:
+        - "config/**/*"
+  - label: "openspec"
+    matcher:
+      files:
+        - "openspec/**/*"
