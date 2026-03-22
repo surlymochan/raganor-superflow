@@ -2,6 +2,15 @@
 
 欢迎为 Superflow 项目做出贡献！
 
+## 项目理念
+
+Superflow 使用**自己的四阶段工作流**构建（吃狗粮），遵循**Spec 驱动开发 (SDD)**。
+
+在贡献之前，请阅读：
+- [OpenSpec 使用说明](./openspec/README.md)
+- [GitHub 规范 v0.1](./openspec/specs/superflow/github-norm-v0.1.md)
+- [工作流规范 v0.1](./openspec/specs/superflow/workflow-v0.1.md)
+
 ## 开发环境设置
 
 ```bash
@@ -18,6 +27,32 @@ npm test
 # 安装到本地测试
 npm run install:claude-code
 ```
+
+## 贡献流程
+
+### 使用 Superflow 工作流贡献
+
+我们推荐使用 Superflow 工作流进行贡献：
+
+```bash
+# 1. 发起变更（阶段 1: 脑暴）
+/superflow:brainstorm 添加新功能
+
+# 2. 生成计划（阶段 2: 计划）
+/superflow:plan <变更名称>
+
+# 3. 执行实现（阶段 3: 执行）
+/superflow:execute <变更名称>
+
+# 4. 归档（阶段 4: 归档）
+/superflow:archive <变更名称>
+```
+
+### 传统方式贡献
+
+如果不使用 Superflow 工作流，请确保：
+1. 在 `docs/plans/` 创建设计文档
+2. 遵循四阶段门禁精神（先设计，再实现，有审查）
 
 ## 提交指南
 
@@ -81,6 +116,16 @@ npm test
 - LF 换行符
 - 文件末尾换行
 - 移除行尾空白
+
+### 合规性验证
+
+在提交之前，运行合规性验证：
+
+```bash
+node scripts/validate-norm.js
+```
+
+这将检查项目是否遵循 Superflow GitHub Norm v0.1。
 
 ## 问题反馈
 

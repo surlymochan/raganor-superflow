@@ -1,0 +1,23 @@
+# PR Labeler 配置
+# 根据修改文件自动打标签
+
+feature:
+  - src/**/*
+  - scripts/**/*
+ci:
+  - .github/workflows/**/*
+documentation:
+  - '**/*.md'
+  - docs/**/*
+testing:
+  - '**/*.test.ts'
+  - '**/*.test.js'
+  - '**/*.spec.ts'
+  - '**/*.spec.js'
+dependencies:
+  - package.json
+  - package-lock.json
+config:
+  - config/**/*
+openspec:
+  - openspec/**/*

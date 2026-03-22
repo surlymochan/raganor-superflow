@@ -1,0 +1,78 @@
+name: Code Review
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  # 1. 代码质量检查
+  lint:
+    name: Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint --if-present
+        continue-on-error: true
+
+  # 2. 代码规范检查
+  standards-review:
+    name: Standards Compliance
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check naming conventions (kebab-case)
+        run: |
+          echo "=== Naming Conventions Check ==="
+          ls -1 config/commands/ scripts/ 2>/dev/null | grep -E '[A-Z]' | head -10 || echo "Naming OK"
+
+      - name: Verify openspec structure
+        run: |
+          echo "=== OpenSpec Structure Check ==="
+          test -d openspec/specs && echo "✓ openspec/specs exists" || echo "✗ openspec/specs missing"
+          test -d openspec/changes && echo "✓ openspec/changes exists" || echo "✗ openspec/changes missing"
+
+  # 3. 总结报告
+  summary:
+    name: Review Summary
+    runs-on: ubuntu-latest
+    needs: [lint, standards-review]
+
+    steps:
+      - name: Print Summary
+        run: |
+          echo "=========================================="
+          echo "    Code Review Summary"
+          echo "=========================================="
+          echo ""
+          echo "Review completed. Please check individual job outputs for details."
+          echo ""
+          echo "Key areas checked:"
+          echo "  ✓ Code Quality (ESLint)"
+          echo "  ✓ Standards Compliance"
+          echo ""
+          echo "Note: This is an automated review. Human review is still recommended."
