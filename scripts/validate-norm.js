@@ -6,8 +6,8 @@
  * 验证项目是否遵循 Superflow GitHub Norm v0.1
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 // ANSI 颜色代码
 const colors = {
@@ -38,7 +38,6 @@ const requiredFiles = [
 const recommendedFiles = [
   '.github/workflows/qa-adversarial-review.yml',
   '.github/workflows/codeql.yml',
-  '.github/labeler.yml',
   '.github/labeler.yml',
   'docs/design/README.md',
   'docs/design/DOCUMENT-MAP.md',

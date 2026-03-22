@@ -29,7 +29,8 @@
     "install:opencode": "node scripts/install-opencode.js",
     "install:cursor": "node scripts/install-cursor.js",
     "install:all": "npm run install:claude-code && npm run install:opencode && npm run install:cursor",
-    "test": "node -c scripts/install-claude-code.js && node -c scripts/install-opencode.js && node -c scripts/install-cursor.js && echo '✓ All scripts syntax OK'",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint scripts/",
     "validate": "node scripts/validate-norm.js",
     "validate:norm": "node scripts/validate-github-norm.js",
@@ -54,6 +55,7 @@
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "eslint": "^9.0.0",
-    "globals": "^15.0.0"
+    "globals": "^15.0.0",
+    "vitest": "^3.0.0"
   }
 }

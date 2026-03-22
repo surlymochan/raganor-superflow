@@ -67,6 +67,7 @@ jobs:
           node -c scripts/install-claude-code.js
           node -c scripts/install-opencode.js
           node -c scripts/install-cursor.js
+          node -c scripts/validate-norm.js
 
       - name: Verify config files exist
         run: |
@@ -74,3 +75,6 @@ jobs:
           test -f config/commands/plan.md
           test -f config/commands/execute.md
           test -f config/commands/archive.md
+
+      - name: Validate norm compliance
+        run: node scripts/validate-norm.js
