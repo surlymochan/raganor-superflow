@@ -1,0 +1,33 @@
+name: Gitleaks Scan
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main, master]
+
+jobs:
+  gitleaks:
+    name: Secret Scan (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### 🔍 Gitleaks Secret Scan 完成" >> $GITHUB_STEP_SUMMARY
+          echo ""
+          echo "**如果发现 secret**:" >> $GITHUB_STEP_SUMMARY
+          echo "1. 🚨 立即撤销泄露的密钥" >> $GITHUB_STEP_SUMMARY
+          echo "2. 从 Git 历史中彻底删除" >> $GITHUB_STEP_SUMMARY
+          echo "3. 重新生成新密钥" >> $GITHUB_STEP_SUMMARY
