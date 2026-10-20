@@ -15,7 +15,7 @@ Superflow 使用**自己的四阶段工作流**构建（吃狗粮），遵循**S
 
 ```bash
 # 克隆仓库
-git clone https://github.com/raganor/raganor-superflow.git
+git clone https://github.com/surlymochan/raganor-superflow.git
 cd raganor-superflow
 
 # 安装依赖
@@ -129,7 +129,7 @@ node scripts/validate-norm.js
 
 ## 问题反馈
 
-遇到问题？请提交 [Issue](https://github.com/raganor/raganor-superflow/issues)
+遇到问题？请提交 [Issue](https://github.com/surlymochan/raganor-superflow/issues)
 
 ## 许可证
 

@@ -15,9 +15,9 @@ A: 参考 [README.md](./README.md) 的快速开始部分。
 A: Claude Code、OpenCode、Cursor。
 
 **Q: 如何报告问题？**
-A: 请提交 [Issue](https://github.com/raganor/raganor-superflow/issues)。
+A: 请提交 [Issue](https://github.com/surlymochan/raganor-superflow/issues)。
 
 ### 联系方式
 
-- 项目仓库：https://github.com/raganor/raganor-superflow
-- NPM 包：https://www.npmjs.com/package/@raganor/superflow
+- 项目仓库：https://github.com/surlymochan/raganor-superflow
+- NPM 包：尚未发布，请从源码安装

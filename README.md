@@ -1,8 +1,10 @@
 # Superflow - 跨平台超级工作流
 
 > **SDD + 一句话需求 + TDD + 对抗性验证的长程模糊任务最佳帮手！**
+>
+> **状态（2026-10）：** 维护模式，只做稳定性修复。当前主线是我的另一个项目 [openflow](https://github.com/surlymochan/openflow) —— 面向 AI 编码 agent 的可执行交付工作流。
 
-[![npm version](https://img.shields.io/npm/v/@raganor/superflow.svg)](https://www.npmjs.com/package/@raganor/superflow)
+[![CI](https://github.com/surlymochan/raganor-superflow/actions/workflows/ci.yml/badge.svg)](https://github.com/surlymochan/raganor-superflow/actions/workflows/ci.yml)
 ![支持平台](https://img.shields.io/badge/platforms-Claude%20Code%20%7C%20OpenCode%20%7C%20Cursor-blue)
 
 ## 快速开始
@@ -11,7 +13,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/raganor/raganor-superflow.git
+git clone https://github.com/surlymochan/raganor-superflow.git
 cd raganor-superflow
 
 # 安装到所有平台
@@ -141,5 +143,5 @@ MIT
 
 ## 相关链接
 
-- [GitHub 仓库](https://github.com/raganor/raganor-superflow)
-- [NPM 包](https://www.npmjs.com/package/@raganor/superflow)
+- [GitHub 仓库](https://github.com/surlymochan/raganor-superflow)
+- NPM 包：尚未发布，请按上方「快速开始」从源码安装
